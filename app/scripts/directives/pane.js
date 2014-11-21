@@ -11,10 +11,8 @@
     return {
       restrict: 'A',
       link: function(scope, element) {
-        var mousewheelevt, _ref;
-        mousewheelevt = (_ref = /Firefox/i.test(navigator.userAgent)) != null ? _ref : {
-          "DOMMouseScroll": "mousewheel"
-        };
+        var mousewheelevt;
+        mousewheelevt = /Firefox/i.test(navigator.userAgent) !== null ? 'DOMMouseScroll' : 'mousewheel';
         scope.inst = Draggable.create(element, {
           trigger: '#Tree-Diagram'
         });
@@ -28,14 +26,15 @@
             scale: scope.zoom
           });
         };
-        scope.$on('NODE_DRAG_START', function(event, id) {
+        scope.$on('NODE_DRAG_START', function() {
           scope.inst[0].disable();
           return null;
         });
-        return scope.$on('NODE_DRAG_END', function(event, id) {
+        scope.$on('NODE_DRAG_END', function() {
           scope.inst[0].enable();
           return null;
         });
+        return null;
       }
     };
   });

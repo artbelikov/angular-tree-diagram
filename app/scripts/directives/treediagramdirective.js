@@ -36,10 +36,12 @@
             displayName: 'noname',
             hasChildren: false,
             parentId: null,
-            children_count: 0,
-            childless_count: 0
+            childrenCount: 0,
+            childlessCount: 0
           };
-          extend && _.extend(nn, extend);
+          if (extend) {
+            _.extend(nn, extend);
+          }
           return nn;
         };
         scope.addNewNode = function() {
@@ -68,11 +70,8 @@
           scope.showModal = false;
           return null;
         };
-        scope.treeNodeExpand = function(id, allow_max) {
+        scope.treeNodeExpand = function(id, allowMax) {
           var k, obj, _ref, _ref1;
-          if (allow_max == null) {
-            allow_max = false;
-          }
           if (!scope.treeExpandAll) {
             if (scope.nodes[scope.nodes[id].parentId]) {
               _ref = scope.nodes[scope.nodes[id].parentId].children;
@@ -90,10 +89,10 @@
               }
             }
           }
-          if (!(allow_max || scope.nodes[id].children_count <= scope.maxNodeDisplay)) {
+          if (!allowMax && scope.nodes[id].childrenCount >= scope.maxNodeDisplay) {
             scope.nodes['compact' + id] = {
               id: 'compact' + id,
-              displayName: scope.nodes[id].children_count + ' элементов скрыто',
+              displayName: scope.nodes[id].childrenCount + ' nodes hidden',
               compacted: true,
               parentId: id
             };
@@ -120,7 +119,7 @@
             _ref = scope.nodes;
             for (id in _ref) {
               node = _ref[id];
-              if (scope.nodes[id].hasChildren && !scope.nodes[id].mobsCount) {
+              if (scope.nodes[id].hasChildren) {
                 scope.nodes[id].toggle = true;
               }
             }
@@ -133,7 +132,7 @@
             _ref1 = scope.nodes;
             for (id in _ref1) {
               node = _ref1[id];
-              if (scope.nodes[id].hasChildren && !scope.nodes[id].mobsCount) {
+              if (scope.nodes[id].hasChildren) {
                 scope.nodes[id].toggle = false;
               }
             }
@@ -159,6 +158,18 @@
         scope.$on('NODE_DRAG_END', function(event, id) {
           $('.tree-drop-circle').removeClass('cshow');
           scope.treeNodeDragging = false;
+          if (scope.newParent) {
+            scope.nodes[scope.newParent].children[id] = {
+              id: id
+            };
+            scope.nodes[scope.newParent].hasChildren = true;
+            if (scope.nodes[id].parentId) {
+              delete scope.nodes[scope.nodes[id].parentId].children[id];
+            } else {
+              delete scope.roots[id];
+            }
+            scope.nodes[id].parentId = scope.newParent.id;
+          }
           scope.draggingNode = null;
           return null;
         });

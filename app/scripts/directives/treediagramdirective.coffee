@@ -27,9 +27,9 @@ angular.module('angularTreeDiagramApp')
         displayName: 'noname'
         hasChildren: false
         parentId: null
-        children_count: 0
-        childless_count: 0
-      extend && _.extend(nn,extend)
+        childrenCount: 0
+        childlessCount: 0
+      if extend then _.extend(nn,extend)
       return nn
     scope.addNewNode = ()->
       scope.showModal = true
@@ -52,7 +52,7 @@ angular.module('angularTreeDiagramApp')
       scope.formNode = {}
       scope.showModal = false
       null
-    scope.treeNodeExpand = (id, allow_max = false) ->
+    scope.treeNodeExpand = (id, allowMax) ->
       if (!scope.treeExpandAll)
         if (scope.nodes[scope.nodes[id].parentId])
           for k, obj of scope.nodes[scope.nodes[id].parentId].children
@@ -61,10 +61,10 @@ angular.module('angularTreeDiagramApp')
         else
           for k, obj of scope.roots
             scope.treeNodeCollapse k
-      if (!(allow_max || scope.nodes[id].children_count <= scope.maxNodeDisplay))
+      if !allowMax and scope.nodes[id].childrenCount >= scope.maxNodeDisplay
         scope.nodes['compact' + id] =
           id: 'compact' + id
-          displayName: scope.nodes[id].children_count + ' элементов скрыто'
+          displayName: scope.nodes[id].childrenCount + ' nodes hidden'
           compacted: true
           parentId: id
       scope.nodes[id].toggle = true
@@ -83,14 +83,14 @@ angular.module('angularTreeDiagramApp')
         scope.treeRootsElements.moved.x = 0
         $('.tree-roots-elements').css(transform:'translate(0px,100px) scale(' + scope.zoom + ')')
         for id, node of scope.nodes
-          if (scope.nodes[id].hasChildren && !scope.nodes[id].mobsCount)
+          if scope.nodes[id].hasChildren
             scope.nodes[id].toggle = true
       else
         scope.zoom = 1
         scope.treeRootsElements.moved.x = $('#groups').width()/2 - _.size(scope.treeRoots)*230/2
         $('.tree-roots-elements').css(transform:'translate(' + ($('#groups').width()/2 - _.size(scope.treeRoots)*230/2)  + 'px,100px) scale(' + scope.zoom + ')')
         for id, node of scope.nodes
-          if (scope.nodes[id].hasChildren && !scope.nodes[id].mobsCount)
+          if scope.nodes[id].hasChildren
             scope.nodes[id].toggle = false
       null
 
@@ -111,6 +111,14 @@ angular.module('angularTreeDiagramApp')
     scope.$on 'NODE_DRAG_END', (event, id)->
       $('.tree-drop-circle').removeClass 'cshow'
       scope.treeNodeDragging = false
+      if scope.newParent
+        scope.nodes[scope.newParent].children[id] = id:id
+        scope.nodes[scope.newParent].hasChildren = true
+        if scope.nodes[id].parentId
+          delete scope.nodes[scope.nodes[id].parentId].children[id]
+        else
+          delete scope.roots[id]
+        scope.nodes[id].parentId = scope.newParent.id
       scope.draggingNode = null
       null
     scope.treeDropAreaMouseenter = (event,id)->

@@ -18,7 +18,6 @@ angular.module('angularTreeDiagramApp')
           else
             for elem in document.querySelectorAll('.tree-parent .rect')
               elem.classList.remove('selected')
-              null
             element.addClass('selected')
           null
         onDragStart:()->
@@ -33,4 +32,5 @@ angular.module('angularTreeDiagramApp')
           null
 
       )
+      null
   )

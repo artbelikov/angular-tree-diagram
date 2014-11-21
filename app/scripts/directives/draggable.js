@@ -11,7 +11,7 @@
     return {
       restrict: 'A',
       link: function(scope, element) {
-        return scope.inst = Draggable.create(element, {
+        scope.inst = Draggable.create(element, {
           zIndexBoost: false,
           onClick: function(e) {
             var elem, _i, _len, _ref;
@@ -22,7 +22,6 @@
               for (_i = 0, _len = _ref.length; _i < _len; _i++) {
                 elem = _ref[_i];
                 elem.classList.remove('selected');
-                null;
               }
               element.addClass('selected');
             }
@@ -45,6 +44,7 @@
             return null;
           }
         });
+        return null;
       }
     };
   });
