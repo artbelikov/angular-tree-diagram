@@ -123,7 +123,7 @@ angular.module('angularTreeDiagramApp')
       $('.tree-drop-circle'+id).removeClass 'h'
       null
 
-    $http.get '/data'
+    $http.get '/data.json'
     .success (data)->
       scope.nodes = data
       for id, obj of data

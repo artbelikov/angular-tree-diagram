@@ -172,7 +172,7 @@
           $('.tree-drop-circle' + id).removeClass('h');
           return null;
         };
-        $http.get('/data').success(function(data) {
+        $http.get('/data.json').success(function(data) {
           var id, obj;
           scope.nodes = data;
           for (id in data) {
