@@ -1,0 +1,54 @@
+<!doctype html>
+<html class="no-js">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <!-- build:css(.) styles/vendor.css -->
+    <!-- bower:css -->
+    <!-- endbower -->
+    <!-- endbuild -->
+    <!-- build:css(.tmp) styles/main.css -->
+    <link rel="stylesheet" href="styles/base-min.css">
+    <link rel="stylesheet" href="styles/tree.css">
+    <!-- endbuild -->
+  </head>
+  <body ng-app="angularTreeDiagramApp">
+
+    <!-- Add your site or application content here -->
+    <div class="" style="height: 100%">
+      <div class="" tree-diagram-directive style="height: 100%"></div>
+    </div>
+
+
+    <!-- build:js(.) scripts/oldieshim.js -->
+    <!--[if lt IE 9]>
+    <script src="bower_components/es5-shim/es5-shim.js"></script>
+    <script src="bower_components/json3/lib/json3.js"></script>
+    <![endif]-->
+    <!-- endbuild -->
+
+    <!-- build:js(.) scripts/vendor.js -->
+    <script src="scripts/libs/TweenLite.min.js"></script>
+    <script src="scripts/libs/Draggable.min.js"></script>
+    <script src="scripts/libs/CSSPlugin.min.js"></script>
+    <!-- bower:js -->
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-animate/angular-animate.js"></script>
+    <script src="bower_components/underscore/underscore.js"></script>
+    <!-- endbower -->
+    <!-- endbuild -->
+
+        <!-- build:js({.tmp,app}) scripts/scripts.js -->
+        <script src="scripts/app.js"></script>
+        <script src="scripts/controllers/main.js"></script>
+        <script src="scripts/controllers/treecontroller.js"></script>
+        <script src="scripts/directives/treediagramdirective.js"></script>
+        <script src="scripts/directives/draggable.js"></script>
+        <script src="scripts/directives/pane.js"></script>
+        <!-- endbuild -->
+</body>
+</html>

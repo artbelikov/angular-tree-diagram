@@ -1,0 +1,554 @@
+html,body{
+  height: 100%;
+  margin: 0;
+}
+.page-break {
+  display: block;
+  page-break-before:always;
+  height: 1px;
+  width: 100%;
+}
+#simple-modal {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.4);
+  z-index: 10000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  .inner-modal {
+    width: 800px;
+    min-height: 600px;
+    background: #fff;
+    margin: auto;
+    padding: 30px;
+  }
+}
+
+#Tree-Diagram {
+  -webkit-print-color-adjust: exact;
+  position: relative;
+  display: block !important;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  overflow: hidden;
+  height: 100%;
+  position: relative;
+  cursor: default !important;
+  text-align: center;
+
+  .toolbar{
+    padding-top: 30px;
+  }
+  .inner_additional_params {
+    margin-bottom: 10px;
+    span {
+      display: inline-block;
+      margin: 0 5px;
+      padding: 2px 5px;
+      font-size: 15px;
+      background: #747474;
+      border: 1px solid #747474;
+      color: #fff !important;
+    }
+    span.mobsCount {
+      background: #A979B3 !important;
+      border: 1px solid #A979B3;
+    }
+    span.chCount {
+      background: #C87335 !important;
+      border: 1px solid #C87335;
+    }
+    span.assignedMobs {
+      background: #B0CB19 !important;
+      border: 1px solid #B0CB19;
+    }
+    span.factMob {
+      background: #F08137 !important;
+      border: 1px solid #F08137;
+    }
+    span.planningMobs {
+      background: #EA556F !important;
+    }
+  }
+  .tree-roots-elements {
+    position: relative;
+    text-align: center;
+    transform: translate(0,50px);
+    display: inline-block;
+    transform-origin: 0 0;
+    white-space: nowrap;
+    cursor: default !important;
+    .tree-parent {
+      position: relative;
+      display: inline-block;
+      margin: 15px;
+      vertical-align: top;
+
+  }
+  .tree-parent {
+    .rect {
+      position: relative;
+      background-color: #fafafa !important;
+      border: 1px solid #dadada;
+      display: inline-block;
+      box-sizing: border-box;
+      width: 200px;
+      -webkit-print-color-adjust:exact;
+      height: 100px;
+      cursor: default !important;
+    }
+    .rect.has-children {
+      background: #a3b0d1 !important;
+    }
+    .tree-element-main {
+      text-align: center;
+      width: 200px;
+      margin: 0 auto;
+    }
+    .rect.selected {
+      border:  1px #007172 solid;
+    }
+    .tree-buttons {
+      position: absolute;
+      display: none;
+    }
+    .edit {
+      span {
+        line-height: 21px;
+        color: #3abec0;
+        display: inline-block;
+        margin-left: 5px;
+        cursor: pointer;
+      }
+    }
+    .rect:hover {
+      .tree-buttons {
+        display: block;
+      }
+    }
+    .rect.mob {
+      background: #00bfc1 !important;
+      textarea {
+        color: #fff !important;
+      }
+      .edit {
+        span {
+          color: #fff !important;
+        }
+      }
+    }
+    .tree-element-container {
+      width: 200px;
+      height: 100px;
+    }
+    .rect.loading:before {
+      content: "";
+      width: 200px;
+      height: 0;
+      background-size: 11%;
+      left: 0;
+      top: 0;
+      display: block;
+      padding-bottom: 100px;
+      margin-bottom: -100px;
+    }
+
+  }
+  .tree-children {
+    text-align: center;
+    transform: e("translate(calc(-50% + 100px),45px) rotateY(0deg)");
+    display: inline-block;
+    position: relative;
+    white-space: nowrap;
+    perspective: 3000px;
+    perspective-origin: center bottom;
+    &.ng-move,
+    &.ng-enter,
+    &.ng-leave{
+      transition:all ease 0.5s;
+      transform-origin: center;
+    }
+
+    &.ng-leave.ng-leave-active,
+    &.ng-move,
+    &.ng-enter {
+      transform:e("translate(calc(-50% + 100px),45px) rotateY(90deg)");
+      opacity: 0;
+    }
+
+    &.ng-leave,
+    &.ng-move.ng-move-active,
+    &.ng-enter.ng-enter-active {
+      transform:e("translate(calc(-50% + 100px),45px) rotateY(0deg)");
+      opacity: 1;
+    }
+  }
+    .tree-parent {
+      position: relative;
+      display: inline-block;
+      margin: 15px;
+      vertical-align: top;
+    }
+    .line-to {
+      position: absolute;
+      top: -30px;
+      border-top: 1px solid #dadada;
+      width: e("calc(100% + 30px)");
+      display: none;
+    }
+  }
+  .tree-compact {
+    position: absolute;
+    -webkit-transform: translate(0,45px);
+    transform: translate(0,45px);
+    .rect {
+      background: #fafafa !important;
+      vertical-align: middle;
+      display: table-cell;
+    }
+    .tree-text {
+      font-size: 12px;
+    }
+  }
+  .tree-text {
+    font-size: 13px;
+    line-height: 17px;
+    font-family: 'Segoe UI', 'Open Sans', sans-serif;
+    height: 98px;
+    textarea {
+      margin: 0;
+      padding: 5px;
+      background: transparent;
+      -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      box-sizing: border-box;
+      height: 100%;
+      width: 100%;
+      border: none;
+      line-height: 16px;
+      text-align: center;
+      pointer-events: none;
+      resize: none;
+      overflow: hidden;
+      width: 200px;
+      height: 100px;
+    }
+  }
+  .tree-connectors {
+    position: absolute;
+    top: -60px;
+    left: 15px;
+    height: 60px;
+    width: 100%;
+  }
+  .tree-link {
+    position: absolute;
+  }
+  .tree-element-container {
+    z-index: 100;
+  }
+  .tree-text.inline-editing {
+    textarea {
+      -webkit-touch-callout: text;
+      -webkit-user-select: text;
+      -khtml-user-select: text;
+      -moz-user-select: text;
+      -ms-user-select: text;
+      user-select: text;
+      pointer-events: auto;
+      text-decoration: underline;
+    }
+  }
+  .tree-drop-circle {
+    position: absolute;
+    top: -56.5px;
+    left: -5px;
+    right: 0;
+    margin: 0 auto;
+    width: 210px;
+    height: 210px;
+    border-radius: 100px;
+    background: #f2f4f6;
+    box-shadow: 0 0 1px #808080;
+    opacity: 0.5;
+    display: none;
+    z-index: 9999;
+  }
+  .tree-drop-circle.h {
+    background: #3e8432;
+    box-shadow: 0 0 1px #3e8432;
+  }
+  .tree-drop-circle.cshow {
+    display: block;
+  }
+  .tree-parent.dragging {
+    pointer-events:none;
+    z-index: 10000;
+    > .ghost-box {
+      display: block;
+    }
+  }
+  .ghost-box {
+    position: absolute;
+    width: 200px;
+    height: 100px;
+    box-shadow: 0 0 6px #808080;
+    display: none;
+    z-index: -1;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    background-color: #fafafa;
+  }
+  .tree-parent:not(.tree-root):before {
+    content: "";
+    width: 50%;
+    position: absolute;
+    height: 30px;
+    left: 0;
+    top: -30px;
+    border-right: 1px solid #dadada;
+  }
+  .tree-children:before {
+    content: "";
+    width: 50%;
+    position: absolute;
+    height: 30px;
+    left: 0;
+    top: -45px;
+    border-right: 1px solid #dadada;
+    max-width: 100%;
+    max-height: 100%;
+  }
+  .tree-compact:before {
+    content: "";
+    width: 50%;
+    position: absolute;
+    height: 29px;
+    left: 0;
+    top: -44px;
+    border-right: 1px solid #dadada;
+  }
+  .tree-addons {
+    position: absolute;
+    bottom: 0;
+    width: 200px;
+  }
+  .tree-elements-group {
+    display: inline-block;
+    position: relative;
+    & > div {
+      & > .line-to {
+        left:0;
+        display: block;
+      }
+    }
+    & > div:first-of-type {
+      & > .line-to {
+        right: -30px;
+        width: e("calc(50% + 30px)");
+        display: block;
+        left: auto;
+      }
+    }
+    & > div:last-of-type {
+      & > .line-to {
+        left: 0;
+        right: auto;
+        width: 50%;
+        display: block;
+      }
+    }
+    .tree-child:last-child {
+      margin-right: 0;
+    }
+    .tree-child:first-child {
+      margin-left: 0;
+    }
+  }
+  .tree-elements-group-haschildren {
+    & > div:first-child {
+      & > .line-to {
+        width: e("calc(100% + 160px)");
+        position: absolute;
+        left: -130px;
+        right: auto;
+        border-top: 1px solid #dadada;
+      }
+    }
+    & > div:first-child:not(:only-child) {
+      margin-left: 30px;
+    }
+  }
+  .tree-expand-all-button {
+    button {
+      padding: 0;
+      height: 36px;
+    }
+  }
+  .tree-expand-all.tree-roots-elements {
+    .tree-children {
+      -webkit-transform: translate(0,45px);
+      transform: translate(0,45px);
+      white-space: normal;
+      .tree-elements-group {
+        white-space: normal;
+        display: block;
+        margin: 0 auto;
+        text-align: left;
+        min-width: 220px;
+      }
+    }
+    .tree-parent {
+      .tree-element-container {
+        width: auto !important;
+      }
+    }
+    .tree-elements-group-nochildren {
+      padding-bottom: 30px;
+      .tree-parent {
+        margin: 15px;
+      }
+      & > div {
+        margin: 10px !important;
+        & > .line-to {
+          display: none;
+        }
+      }
+      & > div:before {
+        display: none;
+      }
+    }
+    .tree-elements-group-nochildren:after {
+      background: url(../img/line-group.png) 100% -59px !important;
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+      width: e("calc(100% - 30px)");
+      content: "";
+      display: block;
+      z-index: -1;
+    }
+    .tree-elements-group-nochildren:before {
+      content: "";
+      width: 50%;
+      position: absolute;
+      height: 100%;
+      left: auto;
+      top: -16px;
+      right: -1px;
+      border-top: 1px solid #dadada;
+      border-right: 1px solid #dadada;
+      border-bottom: 1px solid #dadada;
+      max-height: 100%;
+    }
+    .tree-elements-group-haschildren {
+      text-align: center !important;
+      white-space: nowrap !important;
+      & > div:first-of-type {
+        & > .line-to {
+          right: -30px;
+          width: e("calc(50% + 30px)");
+          display: block;
+          left: auto;
+        }
+      }
+      & > div:first-child:not(:only-of-type) {
+        margin-left: 0;
+      }
+      & > div:only-of-type {
+        & > .line-to {
+          display: none;
+        }
+      }
+    }
+    .group-line {
+      position: absolute;
+      width: e("calc(100% - 20px)");
+      right: 0;
+      border-bottom: 1px solid #dadada;
+      top: 0;
+    }
+    .tree-elements-group-nochildren.single:before {
+      height: e("calc(100% - 74px)");
+      border-bottom: none;
+    }
+  }
+  .tree-roots-elements:not(.tree-expand-all) {
+    .tree-elements-group-nochildren {
+      width: auto !important;
+    }
+  }
+  .tree-elements-group:empty {
+    display: none;
+  }
+  .tree-print-button {
+    button {
+      padding: 0;
+      height: 36px;
+      width: 32px;
+      div {
+        color: #fff;
+        font-size: 24px;
+      }
+    }
+  }
+
+}
+#newElemetModal {
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: #fff;
+  z-index: 10000;
+}
+body.for-print {
+  #group-tree-wr {
+    #groups {
+      overflow: visible;
+    }
+  }
+  .addscroll {
+    overflow: visible !important;
+  }
+}
+body.for-print #header, body.for-print .leftcol, body.for-print #graffle, body.for-print #viewSwitcher, body.for-print #slidingPanelfilterPanelContent {
+  display: none;
+}
+.tree-logo {
+  background: url(../img/logo.png) no-repeat 0 0;
+  width: 180px;
+  height: 33px;
+  position: absolute;
+  left: 10px;
+  top: 10px;
+}
+.tree-title {
+  position: absolute;
+  left: 200px;
+  top: 15px;
+  font-size: 19px;
+  text-shadow: 0 0 1px #fff;
+}
+.tree-page-num {
+  position: absolute;
+  top: 0;
+  background: #fff !important;
+  right: 0;
+}
+.tree-compact {
+  .tree-parent {
+    margin: 15px 0 !important;
+  }
+}

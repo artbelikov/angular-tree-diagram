@@ -1,0 +1,58 @@
+<div ng-if="!roots[element.id] && !nodes[element.id].compacted && !($first && $last)" class="line-to"></div>
+<div class="ghost-box"></div>
+<div id="{{element.id}}" class="tree-element-container">
+<div class="tree-element-main">
+    <div class="rect"
+         ng-class="{'has-children':nodes[element.id].hasChildren}"
+         ng-mousedown="treeNodeMousedown($event,element.id)"
+         ng-dblclick="toogleNode($event, element.id)"
+         draggable>
+        <div class="tree-buttons" ng-if="!nodes[element.id].compacted">
+            <div class="edit"><span ng-mousedown="treeNodeInlineEdit($event,element.id)" class="grid-icon ion-compose"></span></div>
+        </div>
+        <div class="tree-text">
+            <span ng-if="nodes[element.id].compacted">{{nodes[element.parentId].children_count+' элемнтов скрыто'}}</span>
+            <textarea ng-if="!nodes[element.id].compacted">{{nodes[element.id].displayName}}</textarea>
+        </div>
+        <div class="tree-addons" ng-if="!nodes[element.id].compacted">
+            <div class="tree-role-dropdown" ng-if="groupTree == 'employee'" ng-include src="'/views/treeAddonRoleEmployee.html'"></div>
+            <div class="tree-role-dropdown" ng-if="groupTree == 'faEmployee'" ng-include src="'/views/treeAddonFaRoleEmployee.html'"></div>
+            <div class="inner_additional_params" ng-if="groupTree == 'MobNet' && !nodes[element.id].original_data.mobilizer" ng-include src="'/views/treeAddonMobilizerNumbers.html'"></div>
+        </div>
+    </div>
+</div>
+	<div class="tree-children"
+         ng-if="!treeExpandAll && nodes[element.id].hasChildren && !nodes['compact'+element.id] && nodes[element.id].toggle">
+		<div class="tree-elements-group">
+            <div ng-repeat="(key, element) in nodes[element.id].children"
+             class="tree-parent tree-child"  ng-include src="'/views/branch.html'"></div>
+        </div>
+</div>
+  <div class="tree-children"
+       ng-if="treeExpandAll && nodes[element.id].hasChildren && !nodes['compact'+element.id] && nodes[element.id].toggle" ng-class="{'cc':loopOfTheMultipleChecking(element.id)}">
+      <div ng-if="!nodes[element.id].hideChildlessContainer" class="tree-elements-group tree-elements-group-nochildren" ng-class="{'single':nodes[element.id].singlrGroup}" style="width:{{Math.floor(Math.sqrt(nodes[element.id].childless_count))*220}}px;">
+          <div ng-if="(!nodes[element.id].hasChildren || !nodes[element.id].toggle) || (nodes[element.id].mobsCount && !nodes[element.id].toggle)"
+               ng-repeat="(key, element) in nodes[element.id].children"
+               class="tree-parent tree-child"  ng-include src="'/views/branch.html'">
+
+          </div>
+      </div>
+      <div class="tree-elements-group tree-elements-group-haschildren">
+          <div ng-if="(nodes[element.id].hasChildren && nodes[element.id].toggle) || (nodes[element.id].mobsCount && nodes[element.id].toggle)" ng-repeat="(key, element) in nodes[element.id].children"
+               class="tree-parent tree-child"  ng-include src="'/views/branch.html'">
+
+          </div>
+      </div>
+  </div>
+<div class="tree-compact" ng-if="nodes['compact'+element.id] && nodes[element.id].toggle">
+  <div class="tree-parent tree-child" ng-init="element = nodes['compact'+element.id]"
+       ng-include src="'/views/branch.html'"></div>
+
+</div>
+</div>
+<div ng-if="!nodes[element.id].compacted"
+     ng-mouseenter="treeDropAreaMouseenter($event,element.id)"
+     data-xhnxgh="{{draggingNode}}"
+     ng-mouseleave="treeDropAreaMouseleave($event,element.id)"
+     class="tree-drop-circle tree-drop-circle{{ element.id }}">
+</div>
