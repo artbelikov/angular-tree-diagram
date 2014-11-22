@@ -1,20 +1,12 @@
 (function() {
   'use strict';
-  var dd,
-    __slice = [].slice;
-
-  dd = function() {
-    var v;
-    v = 1 <= arguments.length ? __slice.call(arguments, 0) : [];
-    return console.log(v);
-  };
-
   angular.module('angularTreeDiagramApp').directive('treeDiagramDirective', function($http) {
     return {
       restrict: 'A',
       templateUrl: '/views/tree.html',
       controller: 'MainCtrl',
       transclude: true,
+      require: 'treeDiagramDirective',
       link: function(scope, element) {
         scope.nodeWidth = 200;
         scope.nodeHeight = 100;
@@ -22,7 +14,6 @@
         scope.zoom = 1;
         scope.draggingNode = null;
         scope.selectedElements = [];
-        scope.nodes = {};
         scope.roots = {};
         scope.maxNodeDisplay = 20;
         scope.Math = Math;
@@ -183,16 +174,16 @@
           $('.tree-drop-circle' + id).removeClass('h');
           return null;
         };
-        $http.get('/data.json').success(function(data) {
+        scope.$watch('nodes', function(n) {
           var id, obj;
-          scope.nodes = data;
-          for (id in data) {
-            obj = data[id];
-            if (!obj.parentId) {
-              scope.roots[id] = obj;
+          if (n) {
+            for (id in n) {
+              obj = n[id];
+              if (obj && obj.hasOwnProperty('id') && !obj.parentId) {
+                scope.roots[id] = obj;
+              }
             }
           }
-          console.log(scope.nodes);
           return null;
         });
         return null;

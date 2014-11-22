@@ -22,6 +22,7 @@
     "TweenLite": false,
     "Draggable": false,
     "$": false,
-    "_": false
+    "_": false,
+    "Firebase": false
   }
 }

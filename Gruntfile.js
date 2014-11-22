@@ -34,7 +34,7 @@ module.exports = function (grunt) {
         tasks: ['wiredep']
       },
       coffee: {
-        files: ['<%= yeoman.app %>/scripts/directives/*.coffee'],
+        files: ['<%= yeoman.app %>/scripts/{,*/}*.coffee'],
         tasks: ['coffee']
       },
       js: {
@@ -364,10 +364,10 @@ module.exports = function (grunt) {
     coffee: {
       glob_to_multiple: {
         expand: true,
-        flatten: true,
-        cwd: 'app/scripts/directives/',
-        src: ['*.coffee'],
-        dest: 'app/scripts/directives/',
+        flatten: false,
+        cwd: 'app/scripts/',
+        src: ['**/*.coffee'],
+        dest: 'app/scripts/',
         ext: '.js'
       }
     }
@@ -388,7 +388,7 @@ module.exports = function (grunt) {
       'watch'
     ]);
   });
-
+  grunt.registerTask('cof',['coffee']);
   grunt.registerTask('test', [
     'clean:server',
     'concurrent:test',

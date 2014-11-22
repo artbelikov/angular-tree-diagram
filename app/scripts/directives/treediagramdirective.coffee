@@ -1,12 +1,11 @@
 'use strict'
-dd = (v...) ->
-  console.log v
 angular.module('angularTreeDiagramApp')
 .directive('treeDiagramDirective', ($http)->
   restrict: 'A'
   templateUrl: '/views/tree.html'
   controller: 'MainCtrl'
   transclude: true
+  require: 'treeDiagramDirective'
   link: (scope, element) ->
     scope.nodeWidth = 200
     scope.nodeHeight = 100
@@ -14,7 +13,6 @@ angular.module('angularTreeDiagramApp')
     scope.zoom = 1
     scope.draggingNode = null
     scope.selectedElements = []
-    scope.nodes = {}
     scope.roots = {}
     scope.maxNodeDisplay = 20
     scope.Math = Math
@@ -130,14 +128,11 @@ angular.module('angularTreeDiagramApp')
       scope.newParent = null
       $('.tree-drop-circle'+id).removeClass 'h'
       null
-
-    $http.get '/data.json'
-    .success (data)->
-      scope.nodes = data
-      for id, obj of data
-        if !obj.parentId
-          scope.roots[id] = obj
-      console.log scope.nodes
+    scope.$watch 'nodes', (n)->
+      if n
+        for id, obj of n
+          if obj and obj.hasOwnProperty('id') and !obj.parentId
+            scope.roots[id] = obj
       null
     null
 )
