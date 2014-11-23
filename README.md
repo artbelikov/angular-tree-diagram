@@ -4,17 +4,6 @@ This is UI for Hierarchical Tree Diagram made with angular.js and few other libr
 ##Screenshot##
 ![Screenshot](http://i.imgur.com/kfh1HuD.png)
 ##Minimum Data Format##
-  <id>:{
-    id:id:string,
-    children:{
-      <id>:{
-        id:id:string
-      }
-    },
-    hasChildren:boolean,
-    parentId: null or id:string,
-    toggle: boolean,
-    displayName: string
-  }
+![Screenshot](http://i.imgur.com/VnyYmjN.png)
 ##Firebase##
 I used Firebase as example. You can use whatever backend you want.
