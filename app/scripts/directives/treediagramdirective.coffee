@@ -110,6 +110,8 @@ angular.module('angularTreeDiagramApp')
       $('.tree-drop-circle').removeClass 'cshow'
       scope.treeNodeDragging = false
       if scope.newParent
+        if !scope.nodes[scope.newParent].children
+          scope.nodes[scope.newParent].children = {}
         scope.nodes[scope.newParent].children[id] = id:id
         scope.nodes[scope.newParent].hasChildren = true
         if scope.nodes[id].parentId

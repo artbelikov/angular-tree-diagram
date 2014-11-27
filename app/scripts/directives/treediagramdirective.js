@@ -150,6 +150,9 @@
           $('.tree-drop-circle').removeClass('cshow');
           scope.treeNodeDragging = false;
           if (scope.newParent) {
+            if (!scope.nodes[scope.newParent].children) {
+              scope.nodes[scope.newParent].children = {};
+            }
             scope.nodes[scope.newParent].children[id] = {
               id: id
             };
