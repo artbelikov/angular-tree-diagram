@@ -7,3 +7,6 @@ This is UI for Hierarchical Tree Diagram made with angular.js and few other libr
 ![Screenshot](http://i.imgur.com/VnyYmjN.png)
 ##Firebase##
 I used Firebase as example. You can use whatever backend you want.
+###Features###
+	drag an drop
+	css3 animation
