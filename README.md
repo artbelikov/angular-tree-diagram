@@ -3,7 +3,7 @@
 This is UI for Hierarchical Tree Diagram made with angular.js and few other libraries.
 ##Screenshot##
 ![Screenshot](http://i.imgur.com/kfh1HuD.png)
-[a Demo](http://artem-yevgrafov.github.io/angular-tree-diagram/)
+[Demo](http://artem-yevgrafov.github.io/angular-tree-diagram/)
 ##Minimum Data Format##
 ![Screenshot](http://i.imgur.com/VnyYmjN.png)
 ##Firebase##
