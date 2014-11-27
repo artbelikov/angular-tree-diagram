@@ -3,7 +3,7 @@
   angular.module('angularTreeDiagramApp').directive('treeDiagramDirective', function() {
     return {
       restrict: 'A',
-      templateUrl: '/views/tree.html',
+      templateUrl: './views/tree.html',
       controller: 'MainCtrl',
       transclude: true,
       require: 'treeDiagramDirective',
@@ -37,13 +37,13 @@
         };
         scope.addNewNode = function() {
           scope.showModal = true;
-          scope.modalPath = '/views/editForm.html';
+          scope.modalPath = './views/editForm.html';
           scope.formNode = scope.newNode();
           return null;
         };
         scope.editNode = function() {
           scope.showModal = true;
-          scope.modalPath = '/views/editForm.html';
+          scope.modalPath = './views/editForm.html';
           scope.formNode = scope.nodes[document.querySelector('.rect.selected').parentNode.parentNode.getAttribute('id')];
           return null;
         };

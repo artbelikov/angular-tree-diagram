@@ -9,7 +9,7 @@
   <div class="tree-roots-elements" pane ng-class="{'tree-expand-all':treeExpandAll}">
       <div class="tree-parent tree-root tree-root-{{ element.id }}" ng-repeat="element in roots track by element.id"
            ng-class="{'has-children':nodes[element.id].hasChildren}"
-           ng-include src="'/views/branch.html'"></div>
+           ng-include src="'./views/branch.html'"></div>
   </div>
 </div>
 <div id="simple-modal" ng-show="showModal" ng-click="showModal = false">

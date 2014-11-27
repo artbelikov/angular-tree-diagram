@@ -2,7 +2,7 @@
 angular.module('angularTreeDiagramApp')
 .directive('treeDiagramDirective', ()->
   restrict: 'A'
-  templateUrl: '/views/tree.html'
+  templateUrl: './views/tree.html'
   controller: 'MainCtrl'
   transclude: true
   require: 'treeDiagramDirective'
@@ -31,12 +31,12 @@ angular.module('angularTreeDiagramApp')
       return nn
     scope.addNewNode = ()->
       scope.showModal = true
-      scope.modalPath = '/views/editForm.html'
+      scope.modalPath = './views/editForm.html'
       scope.formNode = scope.newNode()
       null
     scope.editNode = ()->
       scope.showModal = true
-      scope.modalPath = '/views/editForm.html'
+      scope.modalPath = './views/editForm.html'
       scope.formNode = scope.nodes[document.querySelector('.rect.selected').parentNode.parentNode.getAttribute('id')]
       null
     scope.acceptForm = () ->
