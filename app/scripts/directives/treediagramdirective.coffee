@@ -1,6 +1,6 @@
 'use strict'
 angular.module('angularTreeDiagramApp')
-.directive('treeDiagramDirective', ($http)->
+.directive('treeDiagramDirective', ()->
   restrict: 'A'
   templateUrl: '/views/tree.html'
   controller: 'MainCtrl'
@@ -31,12 +31,12 @@ angular.module('angularTreeDiagramApp')
       return nn
     scope.addNewNode = ()->
       scope.showModal = true
-      scope.modalPath = '/views/editFoem.html'
+      scope.modalPath = '/views/editForm.html'
       scope.formNode = scope.newNode()
       null
     scope.editNode = ()->
       scope.showModal = true
-      scope.modalPath = '/views/editFoem.html'
+      scope.modalPath = '/views/editForm.html'
       scope.formNode = scope.nodes[document.querySelector('.rect.selected').parentNode.parentNode.getAttribute('id')]
       null
     scope.acceptForm = () ->

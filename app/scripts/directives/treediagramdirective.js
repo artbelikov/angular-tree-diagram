@@ -1,6 +1,6 @@
 (function() {
   'use strict';
-  angular.module('angularTreeDiagramApp').directive('treeDiagramDirective', function($http) {
+  angular.module('angularTreeDiagramApp').directive('treeDiagramDirective', function() {
     return {
       restrict: 'A',
       templateUrl: '/views/tree.html',
@@ -37,13 +37,13 @@
         };
         scope.addNewNode = function() {
           scope.showModal = true;
-          scope.modalPath = '/views/editFoem.html';
+          scope.modalPath = '/views/editForm.html';
           scope.formNode = scope.newNode();
           return null;
         };
         scope.editNode = function() {
           scope.showModal = true;
-          scope.modalPath = '/views/editFoem.html';
+          scope.modalPath = '/views/editForm.html';
           scope.formNode = scope.nodes[document.querySelector('.rect.selected').parentNode.parentNode.getAttribute('id')];
           return null;
         };
