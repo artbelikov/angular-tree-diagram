@@ -49,7 +49,7 @@
         };
         scope.acceptForm = function() {
           scope.showModal = false;
-          if (!scope.nodes[scope.formNode.id] && !scope.formNode.parentId) {
+          if (!scope.formNode.parentId) {
             scope.roots[scope.formNode.id] = scope.formNode;
           }
           scope.nodes[scope.formNode.id] = scope.formNode;

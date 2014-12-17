@@ -41,7 +41,7 @@ angular.module('angularTreeDiagramApp')
       null
     scope.acceptForm = () ->
       scope.showModal = false
-      if !scope.nodes[scope.formNode.id] and !scope.formNode.parentId
+      if !scope.formNode.parentId
         scope.roots[scope.formNode.id] = scope.formNode
       scope.nodes[scope.formNode.id] = scope.formNode
       delete scope.formNode
