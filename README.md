@@ -4,4 +4,4 @@ This is UI for Hierarchical Tree Diagram made with angular.js and few other libr
 ##Screenshot##
 ![Screenshot](http://i.imgur.com/kfh1HuD.png)
 ##Minimum Data Format##
-![Screenshot](http://i.imgur.com/VnyYmjN.png)e
+![Screenshot](http://i.imgur.com/VnyYmjN.png)
