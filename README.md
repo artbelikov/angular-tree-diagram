@@ -1,7 +1,9 @@
-#angular-tree-diagram v0.5.3#
-====================
+# angular-tree-diagram v0.5.3
+### This repo is abandoned. Check the [new version](https://github.com/artbelikov/angular2-tree-diagramm) based on Angular 4.
+
 This is UI for Hierarchical Tree Diagram made with angular.js and few other libraries.
-##Screenshot##
+
+### Screenshot
 ![Screenshot](http://i.imgur.com/kfh1HuD.png)
-##Minimum Data Format##
+### Minimum Data Format
 ![Screenshot](http://i.imgur.com/VnyYmjN.png)
